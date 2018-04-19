@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"redis_benchmark/commands"
 	"strconv"
+	"time"
 )
 
 // Configure the count of feedMemory-operators
@@ -45,6 +46,12 @@ func feedMemory(launcher Launcher, head string, step int) {
 	uniqueKey := head + "&" + strconv.Itoa(step) + "&" + strconv.Itoa(rand.Int())
 	cmd := commands.New(commands.SET, uniqueKey, commands.MaxSize)
 	launcher.runOnly(cmd)
+	// Sleep 10 milliseconds
+	duration, err := time.ParseDuration("10ms")
+	if err != nil {
+		log.Fatal(err)
+	}
+	time.Sleep(duration)
 	if !feedMemorySwitch {
 		// Release the stop-caller
 		feedMemoryStopFlag <- true

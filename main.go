@@ -32,14 +32,16 @@ func main() {
 		for _, v := range leftFlag {
 			if memorySize >= v {
 				arrived = true
-				memoryFlag[v] = true
+				delete(memoryFlag, v)
 			}
 		}
 		if arrived {
+			launcherOne.StopFeedMemory()
 			launcherAllRules(launcherOne)
+			launcherOne.StartFeedMemory()
 		}
-		// Sleep 3 seconds
-		duration, err := time.ParseDuration("3s")
+		// Sleep 1 seconds
+		duration, err := time.ParseDuration("1s")
 		if err != nil {
 			log.Fatal(err)
 		}

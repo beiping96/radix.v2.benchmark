@@ -2,7 +2,6 @@ package commands
 
 import (
 	"code.cloudfoundry.org/bytefmt"
-	"fmt"
 	"log"
 	"math/rand"
 )
@@ -60,7 +59,7 @@ func init() {
 
 // Implement fmt.Stringer
 func (commands Commands) String() string {
-	return fmt.Sprintln("Commands: ", commands.cmd, " Size: ", bytefmt.ByteSize(commands.sizeBytes))
+	return "Commands: " + commands.cmd + " Size: " + bytefmt.ByteSize(commands.sizeBytes)
 }
 
 func (commands *Commands) Cmd() string {
